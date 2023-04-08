@@ -18,10 +18,11 @@ class StockFunction(StrEnum):
     (https://www.alphavantage.co/documentation/)
     """
     INTRA_DAY = "TIME_SERIES_INTRADAY"
+    DAILY = "TIME_SERIES_DAILY_ADJUSTED"
 
 
 def fetch_stock_data(
-    function: str = StockFunction.INTRA_DAY, *, symbol: str, interval: str
+    function: str = StockFunction.DAILY, *, symbol: str, interval: str
 ) -> pd.DataFrame:
     url = ALPHA_VANTAGE_API_URL.format(
         function=function,
