@@ -4,6 +4,7 @@ from types import SimpleNamespace
 
 from dotenv import load_dotenv
 
+from src.columns import Stock
 from src.exceptions import EnvNotFound
 
 ENV_PATH = Path(__file__).parents[1] / ".env"
@@ -18,6 +19,11 @@ class _Config:
         self.credentials = SimpleNamespace(
             alpha_vantage=os.environ["ALPHA_VANTAGE_API_KEY"]
         )
+        self.features = SimpleNamespace(
+            lagged_close_days=[1, 2, 3, 4, 5, 6, 7],
+            rolling_mean_close_days=[1, 2, 3, 4, 5, 6, 7]
+        )
+        self.target = Stock.CLOSE  # we try to predict close price of the day.
 
 
 config = _Config()

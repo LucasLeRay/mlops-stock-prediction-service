@@ -1,6 +1,7 @@
 import pandas as pd
 
-from ingestion.stock import fetch_stock_data
+from src.ingestion.features import build_feature_set
+from src.ingestion.postprocess import postprocess_stock_data
 from src.ingestion.stock import fetch_stock_data
 
 # For the moment, only one symbol is used in this project.
@@ -15,9 +16,9 @@ def get_stock_data() -> pd.DataFrame:
     )
 
 
-
 def main():
     stocks = get_stock_data()
+    build_feature_set(stocks)
 
 
 if __name__ == "__main__":
