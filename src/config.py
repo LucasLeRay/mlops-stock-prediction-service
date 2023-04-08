@@ -17,7 +17,8 @@ class _Config:
         load_dotenv(ENV_PATH)
 
         self.credentials = SimpleNamespace(
-            alpha_vantage=os.environ["ALPHA_VANTAGE_API_KEY"]
+            alpha_vantage=os.environ["ALPHA_VANTAGE_API_KEY"],
+            hopsworks=os.environ["HOPSWORKS_API_KEY"]
         )
         self.features = SimpleNamespace(
             lagged_close_days=[1, 2, 3, 4, 5, 6, 7],

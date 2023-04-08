@@ -28,16 +28,15 @@ def build_feature_set(stocks: pd.DataFrame, keep_target=True):
         to_drop.remove(Stock.CLOSE)
 
     return stocks.assign(
-        {
-            **{
-                Feature.LAGGED_TARGET_DAY.format(day=day):
-                    _lagged_close(stocks[Stock.CLOSE], day=day)
-                for day in config.features.lagged_close_days
-            },
-            **{
-                Feature.ROLLING_MEAN_TARGET_DAY.format(day=day):
-                    _rolling_mean_close(stocks[Stock.CLOSE], day=day)
-                for day in config.features.rolling_mean_close_days
-            },
-        }
-    ).drop(to_drop)
+        **{
+            Feature.LAGGED_TARGET_DAY.format(day=day):
+                _lagged_close(stocks[Stock.CLOSE], day=day)
+            for day in config.features.lagged_close_days
+        },
+        **{
+            Feature.ROLLING_MEAN_TARGET_DAY.format(day=day):
+                _rolling_mean_close(stocks[Stock.CLOSE], day=day)
+            for day in config.features.rolling_mean_close_days
+        },
+        **{Feature.DATETIME: stocks.index}
+    ).drop(to_drop, axis=1)
