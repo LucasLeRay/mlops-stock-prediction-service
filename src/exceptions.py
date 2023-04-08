@@ -1,2 +1,6 @@
 class EnvNotFound(Exception):
     ...
+
+
+class FeatureGroupNotFound(Exception):
+    ...
