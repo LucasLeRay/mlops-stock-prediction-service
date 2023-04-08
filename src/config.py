@@ -19,8 +19,8 @@ class _Config:
 
         # TODO: create a dedicated singleton for artifacts, and a dedicated
         # module for filenames.
-        artifacts_dir = ROOT_PATH / "artifact"
-        artifacts_dir.mkdir(exist_ok=True, parents=True)
+        self.artifacts_dir = ROOT_PATH / "artifacts"
+        self.artifacts_dir.mkdir(exist_ok=True, parents=True)
 
         self.credentials = SimpleNamespace(
             alpha_vantage=os.environ["ALPHA_VANTAGE_API_KEY"],
