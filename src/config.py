@@ -17,11 +17,9 @@ class _Config:
             raise EnvNotFound(f"Environment file {ENV_PATH} not found.")
         load_dotenv(ENV_PATH)
 
-        # TODO: create a dedicated singleton for artifacts, and a dedicated
-        # module for filenames.
-        self.artifacts_dir = ROOT_PATH / "artifacts"
-        self.artifacts_dir.mkdir(exist_ok=True, parents=True)
-
+        self.directories = SimpleNamespace(
+            project=ROOT_PATH
+        )
         self.credentials = SimpleNamespace(
             alpha_vantage=os.environ["ALPHA_VANTAGE_API_KEY"],
             hopsworks=os.environ["HOPSWORKS_API_KEY"]

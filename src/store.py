@@ -3,7 +3,6 @@ Manage interacts with feature store.
 """
 
 from datetime import datetime
-from pathlib import Path
 
 import hopsworks
 import pandas as pd
@@ -83,11 +82,11 @@ def split_feature_sets(feature_view):
 
 
 def push_model(model, *, metrics):
-    model_name = str(datetime.now())
-    model_path = save_model(model, name=model_name)
-    relative_path = str(model_path.relative_to(Path(__file__)))
-    (
-        MODEL_REGISTRY.sklearn
-        .create_model(str(model_path), metrics=metrics)
-        .save(relative_path)
-    )
+    model_name = datetime.now().strftime("%Y-%m-%d_%H:%M")
+
+    with save_model(model, name=model_name) as model_path:
+        (
+            MODEL_REGISTRY.sklearn
+            .create_model(model_name, metrics=metrics)
+            .save(model_path)
+        )
