@@ -5,6 +5,10 @@ on:
     - cron: '0 8 * * *'
   workflow_dispatch:
 
+env:
+  ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
+  HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
+
 jobs:
   run:
     runs-on: ubuntu-latest
