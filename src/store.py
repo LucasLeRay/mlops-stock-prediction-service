@@ -85,7 +85,7 @@ def split_feature_sets(feature_view):
 
 
 def push_model(model, *, metrics):
-    model_name = datetime.now().strftime("%Y-%m-%d_%H:%M")
+    model_name = datetime.now().strftime("%Y%m%d_%H%M")
 
     with save_model(model, name=model_name) as model_path:
         (
