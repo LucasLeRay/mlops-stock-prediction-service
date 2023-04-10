@@ -5,7 +5,6 @@ from types import SimpleNamespace
 from dotenv import load_dotenv
 
 from src.columns import Stock
-from src.exceptions import EnvNotFound
 
 ROOT_PATH = Path(__file__).parents[1]
 ENV_PATH = ROOT_PATH / ".env"
@@ -13,9 +12,10 @@ ENV_PATH = ROOT_PATH / ".env"
 
 class _Config:
     def __init__(self):
-        if not ENV_PATH.exists():
-            raise EnvNotFound(f"Environment file {ENV_PATH} not found.")
-        load_dotenv(ENV_PATH)
+        # If env path doesn't exist, it's supposed that env is injected
+        # (e.g.: by CI)
+        if ENV_PATH.exists():
+            load_dotenv(ENV_PATH)
 
         self.directories = SimpleNamespace(
             project=ROOT_PATH
