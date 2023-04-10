@@ -12,8 +12,7 @@ ENV_PATH = ROOT_PATH / ".env"
 
 class _Config:
     def __init__(self):
-        # If env path doesn't exist, it's supposed that env is injected
-        # (e.g.: by CI)
+        # If env path doesn't exist, I assume env is injected (e.g.: by CI)
         if ENV_PATH.exists():
             load_dotenv(ENV_PATH)
 
