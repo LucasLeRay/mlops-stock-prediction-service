@@ -1,18 +1,16 @@
-from enum import auto
-
 from src.utils import StrEnum
 
 
 class Stock(StrEnum):
     """Columns contained in the stock set"""
-    OPEN = auto()
-    HIGH = auto()
-    LOW = auto()
-    CLOSE = auto()
-    ADJUSTED_CLOSE = auto()
-    VOLUME = auto()
-    DIVIDEND_AMOUNT = auto()
-    SPLIT_COEF = auto()
+    OPEN = "open"
+    HIGH = "high"
+    LOW = "low"
+    CLOSE = "close"
+    ADJUSTED_CLOSE = "adjusted_close"
+    VOLUME = "volume"
+    DIVIDEND_AMOUNT = "dividend_amount"
+    SPLIT_COEF = "split_coef"
 
 
 class Feature(StrEnum):
