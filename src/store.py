@@ -3,7 +3,6 @@ Manage interacts with feature store.
 """
 
 from contextlib import contextmanager
-from datetime import datetime
 from pathlib import Path
 
 import hopsworks
@@ -91,13 +90,11 @@ def push_model(model, *, metrics):
     # TODO: Send symbol as an argument, this has **nothing** to do here.
     from src.ingestion.main import SYMBOL
 
-    model_name = "_".join([SYMBOL + datetime.now().strftime("%Y%m%d_%H%M")])
-
     # TODO: give input example, as well as schemas
-    with save_model(model, name=model_name) as model_path:
+    with save_model(model, name=SYMBOL) as model_path:
         (
             MODEL_REGISTRY.sklearn
-            .create_model(model_name, metrics=metrics)
+            .create_model(SYMBOL, metrics=metrics)
             .save(model_path)
         )
 
