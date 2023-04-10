@@ -26,7 +26,7 @@ class _Config:
         )
         self.features = SimpleNamespace(
             lagged_close_days=[1, 2, 3, 4, 5, 6, 7, 10, 20, 30, 50],
-            rolling_mean_close_days=[1, 2, 3, 4, 5, 6, 7, 10, 20, 30, 50]
+            rolling_mean_close_days=[2, 3, 4, 5, 6, 7, 10, 20, 30, 50]
         )
         self.target = Stock.CLOSE  # we try to predict close price of the day.
         self.test_size = .2

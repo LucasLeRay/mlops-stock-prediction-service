@@ -2,9 +2,12 @@
 Manage interacts with feature store.
 """
 
+from contextlib import contextmanager
 from datetime import datetime
+from pathlib import Path
 
 import hopsworks
+import joblib
 import pandas as pd
 
 from src.columns import Feature
@@ -85,7 +88,10 @@ def split_feature_sets(feature_view):
 
 
 def push_model(model, *, metrics):
-    model_name = datetime.now().strftime("%Y%m%d_%H%M")
+    # TODO: Send symbol as an argument, this has **nothing** to do here.
+    from src.ingestion.main import SYMBOL
+
+    model_name = "_".join([SYMBOL + datetime.now().strftime("%Y%m%d_%H%M")])
 
     # TODO: give input example, as well as schemas
     with save_model(model, name=model_name) as model_path:
@@ -94,3 +100,23 @@ def push_model(model, *, metrics):
             .create_model(model_name, metrics=metrics)
             .save(model_path)
         )
+
+
+def pull_historical_targets():
+    fg = _get_feature_group()
+    df = fg.select([config.target, Feature.DATETIME]).read()
+    df[config.target] = df[config.target].astype(float)
+
+    return df
+
+
+@contextmanager
+def get_model(*, name, version):
+    # NOTE: One alternative is to get the best model using
+    # ModelRegistry.get_best_model. It's something to investigate.
+    hs_model = MODEL_REGISTRY.get_model(name, version=version)
+
+    model_path = Path(hs_model.download()) / (name + ".pkl")
+    yield joblib.load(model_path)
+
+    model_path.unlink()

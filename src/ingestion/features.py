@@ -22,6 +22,9 @@ def _rolling_mean_close(close: pd.Series, *, day: int) -> pd.Series:
     return close.rolling(day).mean().fillna(method="bfill")
 
 
+# NOTE: This function is the offline feature generation. It's different from
+# online feature generation (defined in src.predict.features).
+# Tests should assert consistency between these two processes.
 def build_feature_set(stocks: pd.DataFrame, keep_target=True):
     to_drop = list(Stock)
     if keep_target:

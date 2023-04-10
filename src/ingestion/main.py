@@ -10,6 +10,7 @@ logger = logging.getLogger(__name__)
 
 # For the moment, only one symbol is used in this project.
 # In the future, we might train different models for different symbols.
+# TODO: define it elswehere, as other pipelines depends on it.
 SYMBOL = "AAPL"
 
 

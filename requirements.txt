@@ -6,3 +6,4 @@ pandas==2.0.0
 hopsworks==3.0.5
 joblib==1.2.0
 scikit-learn==1.2.2
+numpy==1.24.2
