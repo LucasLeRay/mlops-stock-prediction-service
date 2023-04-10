@@ -1,0 +1,26 @@
+name: Ingest features
+
+on:
+  schedule:
+    - cron: '0 8 * * *'
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+
+      - name: Set up Python 3.9.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9.7'
+
+      - name: Upgrade pip
+        run: pip install -U pip
+
+      - name: Install project
+        run: pip install -e .
+
+      - name: Run pipeline
+        run: python -m src.cli ingestion
