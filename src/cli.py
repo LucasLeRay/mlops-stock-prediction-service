@@ -1,4 +1,5 @@
 import argparse
+import logging
 from enum import auto
 
 from src.ingestion.main import main as ingestion_pipeline
@@ -18,9 +19,10 @@ PIPELINE_TO_FUNCTION = {
     Pipeline.training: training_pipeline
 }
 
-
 parser = argparse.ArgumentParser()
 parser.add_argument("pipeline", choices=list(Pipeline))
+
+logger = logging.getLogger(__name__)
 
 
 def main(args):
@@ -28,7 +30,7 @@ def main(args):
         PIPELINE_TO_FUNCTION[args.pipeline]()
     except KeyError:
         # TODO: change into a logger
-        print(f"Pipeline '{args.pipeline}' is not implemented yet.")
+        logger.error(f"Pipeline '{args.pipeline}' is not implemented yet.")
 
 
 if __name__ == "__main__":
