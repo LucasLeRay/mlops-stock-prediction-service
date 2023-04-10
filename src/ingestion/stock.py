@@ -7,8 +7,12 @@ from src.utils import StrEnum
 ALPHA_VANTAGE_BASE_URL = "https://www.alphavantage.co/"
 ALPHA_VANTAGE_API_URL = (
     ALPHA_VANTAGE_BASE_URL
-    + "query?function={function}&symbol={symbol}&interval={interval}&apikey="
-    + config.credentials.alpha_vantage
+    + "query?"
+    + "function={function}"
+    + "&symbol={symbol}"
+    + "&interval={interval}"
+    + "&outputsize=full"
+    + f"&apikey={config.credentials.alpha_vantage}"
 )
 
 

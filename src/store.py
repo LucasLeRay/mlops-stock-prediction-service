@@ -26,6 +26,9 @@ FEATURE_VIEW = "stock_price_batch_fv"
 
 
 def push_features(features: pd.DataFrame):
+    # Note that, currently, new features are not automatically added.
+    # If new features need to be added to the group, the user have to manually
+    # delete the feature group, and recreate it through this pipeline.
     feature_group = FEATURE_STORE.get_or_create_feature_group(
         name=FEATURE_GROUP,
         version=1,
