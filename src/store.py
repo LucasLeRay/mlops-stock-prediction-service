@@ -87,6 +87,7 @@ def split_feature_sets(feature_view):
 def push_model(model, *, metrics):
     model_name = datetime.now().strftime("%Y%m%d_%H%M")
 
+    # TODO: give input example, as well as schemas
     with save_model(model, name=model_name) as model_path:
         (
             MODEL_REGISTRY.sklearn
