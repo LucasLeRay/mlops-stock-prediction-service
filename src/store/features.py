@@ -1,4 +1,5 @@
 import pandas as pd
+from hsfs.feature import Feature as HSFeature
 
 from src.columns import Index
 from src.config import config
@@ -71,6 +72,9 @@ def _get_or_create_feature_view(*, query):
         )
 
 
-def pull_stock_features(features):
+def pull_stock_features(features, *, since=None):
     """Pull features from stock group"""
-    return _get_feature_group().select(features).read()
+    query = _get_feature_group().select(features)
+    if since:
+        query = query.filter(HSFeature(Index.DATETIME) >= since)
+    return query.read()
