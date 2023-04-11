@@ -5,6 +5,7 @@ from types import SimpleNamespace
 from dotenv import load_dotenv
 
 from src.columns import Stock
+from src.symbols import Symbol
 
 ROOT_PATH = Path(__file__).parents[1]
 ENV_PATH = ROOT_PATH / ".env"
@@ -16,6 +17,7 @@ class _Config:
         if ENV_PATH.exists():
             load_dotenv(ENV_PATH)
 
+        self.symbol = Symbol.AAPL  # Symbol we want to predict
         self.directories = SimpleNamespace(
             project=ROOT_PATH
         )

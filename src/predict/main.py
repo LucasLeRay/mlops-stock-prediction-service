@@ -1,6 +1,7 @@
 import logging
 
 from src.ingestion.main import SYMBOL
+from src.config import config
 from src.predict.features import build_online_features
 
 logger = logging.getLogger(__name__)
@@ -24,5 +25,5 @@ def main(*, model_name: str, model_version: int = 1):
     with get_model(name=model_name, version=model_version) as model:
         pred = model.predict(next_day_features)[0][0]
         logger.info(
-            f"Close price predicted for '{SYMBOL}' next day is: {pred}."
+            f"Close price predicted for '{config.symbol}' next day is: {pred}."
         )

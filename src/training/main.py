@@ -1,5 +1,6 @@
 import logging
 
+from src.config import config
 from src.training.metrics import compute_metrics
 from src.training.model import get_model
 
@@ -27,5 +28,5 @@ def main():
     logger.info(f"Metrics for new model is {metrics}")
 
     logger.info("Pushing model to registry...")
-    push_model(model, metrics=metrics)
+    push_model(model, metrics=metrics, name=config.symbol)
     logger.info("New model is pushed.")
