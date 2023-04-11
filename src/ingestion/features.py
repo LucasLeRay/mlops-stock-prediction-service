@@ -10,7 +10,7 @@ with some of them requiring real time feature engineering.
 
 import pandas as pd
 
-from src.columns import Feature, Stock
+from src.columns import Feature, Index, Stock
 from src.config import config
 
 
@@ -41,5 +41,5 @@ def build_feature_set(stocks: pd.DataFrame, keep_target=True):
                 _rolling_mean_close(stocks[Stock.CLOSE], day=day)
             for day in config.features.rolling_mean_close_days
         },
-        **{Feature.DATETIME: stocks.index}
+        **{Index.DATETIME: stocks.index}
     ).drop(to_drop, axis=1)

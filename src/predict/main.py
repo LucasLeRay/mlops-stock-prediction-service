@@ -1,6 +1,6 @@
 import logging
 
-from src.ingestion.main import SYMBOL
+from src.columns import Index
 from src.config import config
 from src.predict.features import build_online_features
 

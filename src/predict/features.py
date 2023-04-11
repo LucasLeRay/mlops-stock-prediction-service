@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 
+from src.columns import Index
 from src.config import config
 
 
@@ -17,7 +18,7 @@ def build_online_features(targets: pd.DataFrame) -> np.array:
 
     targets = (
         targets
-        .sort_values("datetime", ascending=False)
+        .sort_values(Index.DATETIME, ascending=False)
         .reset_index(drop=True)
     )[config.target]
 
