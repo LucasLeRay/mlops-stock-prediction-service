@@ -9,13 +9,14 @@ logger = logging.getLogger(__name__)
 
 def main():
     # Store is imported here to avoid unnecessary compute at import time
-    from src.store import pull_features, push_model, split_feature_sets
+    from src.store.features import get_feature_view, split_feature_sets
+    from src.store.model import push_model
 
     logger.info("Get model...")
     model = get_model()
 
     logger.info("Pull features...")
-    feature_view = pull_features()
+    feature_view = get_feature_view()
 
     logger.info("Split train/test sets...")
     X_train, X_test, y_train, y_test = split_feature_sets(feature_view)

@@ -19,7 +19,7 @@ def get_stock_data() -> pd.DataFrame:
 
 def main():
     # Store is imported here to avoid unnecessary compute at import time
-    from src.store import push_features
+    from src.store.features import push_features
 
     # Using the logger prevents me from piping dataframes between functions.
     # I could decorate functions that needs logging and add the logging message

@@ -15,4 +15,9 @@ COLUMNS_MAPPING = {
 
 
 def postprocess_stock_data(stocks: pd.DataFrame) -> pd.DataFrame:
-    return stocks.rename(columns=COLUMNS_MAPPING).sort_index()
+    return (
+        stocks
+        .rename(columns=COLUMNS_MAPPING)
+        .sort_index()
+        .astype(float)
+    )
